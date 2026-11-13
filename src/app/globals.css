@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   NCWU StyleHub — theming
+   Palettes are switchable at runtime via <html data-theme="...">
+   ============================================================ */
+
+:root,
+[data-theme="noir"] {
+  --brand: #1f1d1b;        /* ink — primary surfaces & text */
+  --brand-dark: #100f0e;
+  --brand-soft: #eceae6;   /* subtle fills & hovers */
+  --accent: #b4553f;       /* terracotta — CTAs */
+  --accent-dark: #94402f;
+  --page: #faf8f5;         /* warm off-white page background */
+  --surface: #ffffff;      /* cards */
+  --ink: #1f1d1b;
+  --tint: #e7e2db;         /* light text on dark surfaces */
+  --gold: #b08d57;
+}
+
+[data-theme="ocean"] {
+  --brand: #123a5c;
+  --brand-dark: #0b2740;
+  --brand-soft: #e6edf3;
+  --accent: #c08a3e;
+  --accent-dark: #a3702c;
+  --page: #f5f7f9;
+  --surface: #ffffff;
+  --ink: #14202b;
+  --tint: #dbe6ee;
+  --gold: #c08a3e;
+}
+
+[data-theme="blush"] {
+  --brand: #6d2f4a;
+  --brand-dark: #4d2035;
+  --brand-soft: #f4e6eb;
+  --accent: #c2708a;
+  --accent-dark: #a55b74;
+  --page: #fdf7f9;
+  --surface: #ffffff;
+  --ink: #3b1f2b;
+  --tint: #f0dde4;
+  --gold: #c9a227;
+}
+
+[data-theme="forest"] {
+  --brand: #059669;
+  --brand-dark: #047857;
+  --brand-soft: #d1fae5;
+  --accent: #f97316;
+  --accent-dark: #ea580c;
+  --page: #ecfdf5;
+  --surface: #ffffff;
+  --ink: #064e3b;
+  --tint: #d1fae5;
+  --gold: #f59e0b;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--brand);
+  --color-primary-dark: var(--brand-dark);
+  --color-primary-light: var(--brand-soft);
+  --color-secondary: var(--brand);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-brand-bg: var(--page);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-text: var(--ink);
+  --color-brand-tint: var(--tint);
+  --color-surface: var(--surface);
+  --color-gold: var(--gold);
+  --font-heading: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+::selection {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+/* ---------------- Entrance animations & micro-effects ---------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.55s ease both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.45s ease both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.35s ease both;
+}
+
+/* Staggered entrance for direct children (e.g. product grids) */
+.stagger-fade > * {
+  animation: fade-up 0.55s ease both;
+}
+
+.stagger-fade > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger-fade > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger-fade > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger-fade > *:nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger-fade > *:nth-child(5) {
+  animation-delay: 240ms;
+}
+.stagger-fade > *:nth-child(6) {
+  animation-delay: 300ms;
+}
+.stagger-fade > *:nth-child(7) {
+  animation-delay: 360ms;
+}
+.stagger-fade > *:nth-child(8) {
+  animation-delay: 420ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
