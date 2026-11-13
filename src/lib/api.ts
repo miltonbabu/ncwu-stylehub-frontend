@@ -1,6 +1,6 @@
 import type { AuthPayload, User } from "./types";
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 const TOKEN_KEY = "stylehub_token";
 const USER_KEY = "stylehub_user";

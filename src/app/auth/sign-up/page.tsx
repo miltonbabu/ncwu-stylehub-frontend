@@ -81,11 +81,11 @@ function SignUpContent() {
               id="su-password"
               type="password"
               required
-              minLength={6}
+              minLength={8}
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="At least 6 characters"
+              placeholder="At least 8 characters"
             />
           </Field>
           <Field label="Confirm Password" htmlFor="su-confirm">
